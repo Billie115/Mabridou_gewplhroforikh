@@ -16,7 +16,7 @@
     body {
       min-height: 100vh;
       background: linear-gradient(135deg, #0f766e, #14532d);
-      color: #ffffff;
+      color: white;
       display: flex;
       justify-content: center;
       align-items: center;
@@ -26,12 +26,12 @@
     .container {
       width: 100%;
       max-width: 950px;
-      background: rgba(255, 255, 255, 0.12);
+      background: rgba(255,255,255,0.12);
       backdrop-filter: blur(12px);
       border-radius: 24px;
       padding: 42px;
-      box-shadow: 0 20px 50px rgba(0, 0, 0, 0.25);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      box-shadow: 0 20px 50px rgba(0,0,0,0.25);
+      border: 1px solid rgba(255,255,255,0.2);
     }
 
     header {
@@ -42,18 +42,16 @@
     header h1 {
       font-size: 42px;
       margin-bottom: 10px;
-      letter-spacing: 1px;
     }
 
     header p {
-      font-size: 18px;
       color: #d1fae5;
+      font-size: 18px;
     }
 
     .progress-info {
       display: flex;
       justify-content: space-between;
-      align-items: center;
       margin-bottom: 10px;
       color: #dcfce7;
       font-weight: bold;
@@ -62,7 +60,7 @@
     .progress-bar {
       width: 100%;
       height: 14px;
-      background: rgba(255, 255, 255, 0.2);
+      background: rgba(255,255,255,0.2);
       border-radius: 999px;
       overflow: hidden;
       margin-bottom: 30px;
@@ -71,23 +69,23 @@
     .progress-fill {
       width: 0%;
       height: 100%;
-      background: #ffffff;
+      background: white;
       border-radius: 999px;
       transition: width 0.3s ease;
     }
 
     .quiz-card {
-      background: #ffffff;
+      background: white;
       color: #14532d;
       border-radius: 22px;
       padding: 30px;
-      box-shadow: 0 12px 30px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 12px 30px rgba(0,0,0,0.2);
     }
 
     .question {
       font-size: 22px;
       font-weight: bold;
-      line-height: 1.45;
+      line-height: 1.5;
       margin-bottom: 25px;
     }
 
@@ -116,16 +114,20 @@
       border-color: #9ca3af;
     }
 
+    .answer-btn:disabled {
+      cursor: not-allowed;
+    }
+
     .answer-btn.correct {
       background: #dcfce7;
-      color: #14532d;
       border-color: #16a34a;
+      color: #14532d;
     }
 
     .answer-btn.wrong {
       background: #fee2e2;
-      color: #7f1d1d;
       border-color: #dc2626;
+      color: #7f1d1d;
     }
 
     .feedback {
@@ -140,15 +142,15 @@
     .feedback.correct-box {
       display: block;
       background: #dcfce7;
-      color: #14532d;
       border: 2px solid #16a34a;
+      color: #14532d;
     }
 
     .feedback.wrong-box {
       display: block;
       background: #fee2e2;
-      color: #7f1d1d;
       border: 2px solid #dc2626;
+      color: #7f1d1d;
     }
 
     .feedback strong {
@@ -162,36 +164,92 @@
       border: none;
       border-radius: 16px;
       background: #14532d;
-      color: #ffffff;
+      color: white;
       padding: 15px 28px;
       font-size: 16px;
       font-weight: bold;
       cursor: pointer;
-      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+      box-shadow: 0 8px 20px rgba(0,0,0,0.2);
       transition: transform 0.25s ease, background 0.25s ease;
     }
 
     .next-btn:hover,
     .restart-btn:hover {
-      transform: translateY(-4px);
       background: #0f766e;
+      transform: translateY(-4px);
     }
 
-    .score-screen {
-      text-align: center;
+    .next-btn:disabled {
+      opacity: 0.5;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .results {
       display: none;
+      text-align: center;
     }
 
-    .score-screen h2 {
-      font-size: 40px;
-      margin-bottom: 15px;
+    .results h2 {
+      font-size: 34px;
+      margin-bottom: 14px;
       color: #14532d;
     }
 
-    .score-screen p {
+    .score-text {
       font-size: 20px;
+      margin-bottom: 26px;
+      line-height: 1.6;
+    }
+
+    .result-bars {
+      display: grid;
+      gap: 18px;
       margin-bottom: 30px;
-      color: #374151;
+    }
+
+    .result-label {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 8px;
+      font-weight: bold;
+    }
+
+    .result-bar {
+      height: 18px;
+      background: #e5e7eb;
+      border-radius: 999px;
+      overflow: hidden;
+    }
+
+    .correct-fill,
+    .wrong-fill {
+      height: 100%;
+      width: 0%;
+      border-radius: 999px;
+      transition: width 0.5s ease;
+    }
+
+    .correct-fill {
+      background: #16a34a;
+    }
+
+    .wrong-fill {
+      background: #dc2626;
+    }
+
+    footer {
+      text-align: center;
+      margin-top: 30px;
+      color: #bbf7d0;
+      font-size: 14px;
+    }
+
+    @media (max-width: 600px) {
+      .container { padding: 25px; }
+      header h1 { font-size: 30px; }
+      .quiz-card { padding: 22px; }
+      .question { font-size: 19px; }
     }
   </style>
 </head>
@@ -199,13 +257,13 @@
 
   <main class="container">
     <header>
-      <h1>Mixed Quiz</h1>
+      <h1>Προσομοίωση Εξέτασης</h1>
       <p>20 τυχαίες ερωτήσεις από όλες τις ενότητες</p>
     </header>
 
     <div class="progress-info">
       <span id="questionCounter">Ερώτηση 1 / 20</span>
-      <span id="scoreCounter">Score: 0</span>
+      <span id="progressPercent">0%</span>
     </div>
 
     <div class="progress-bar">
@@ -213,33 +271,49 @@
     </div>
 
     <section class="quiz-card" id="quizCard">
-      <div class="question" id="question"></div>
-
+      <div class="question" id="question">Φόρτωση ερωτήσεων...</div>
       <div class="answers" id="answers"></div>
-
       <div class="feedback" id="feedback"></div>
-
       <button class="next-btn" id="nextBtn" onclick="nextQuestion()" disabled>
         Επόμενη Ερώτηση
       </button>
     </section>
 
-    <section class="quiz-card score-screen" id="scoreScreen">
-      <h2>Quiz Complete!</h2>
-      <p id="finalScore"></p>
+    <section class="quiz-card results" id="scoreScreen">
+      <h2>Αποτελέσματα</h2>
+      <p class="score-text" id="finalScore"></p>
+
+      <div class="result-bars">
+        <div>
+          <div class="result-label">
+            <span>Σωστές απαντήσεις</span>
+            <span id="correctPercentText">0%</span>
+          </div>
+          <div class="result-bar">
+            <div class="correct-fill" id="correctFill"></div>
+          </div>
+        </div>
+        <div>
+          <div class="result-label">
+            <span>Λάθος απαντήσεις</span>
+            <span id="wrongPercentText">0%</span>
+          </div>
+          <div class="result-bar">
+            <div class="wrong-fill" id="wrongFill"></div>
+          </div>
+        </div>
+      </div>
 
       <button class="restart-btn" onclick="restartQuiz()">
-        Restart Quiz
+        Επανεκκίνηση Quiz
       </button>
     </section>
+
+    <footer>© 2026 Γεωπληροφορική</footer>
   </main>
 
   <script>
-
- 
-
     async function loadAllQuestions() {
-
       const files = [
         "enothta1.html",
         "enothta2.html",
@@ -252,27 +326,22 @@
       let combinedQuestions = [];
 
       for (const file of files) {
-        const response = await fetch(file);
-        const text = await response.text();
-
-        const match = text.match(/const questions = \[(.*?)\];/s);
-
-        if (match) {
-          const parsed = eval("[" + match[1] + "]");
-          combinedQuestions.push(...parsed);
+        try {
+          const response = await fetch(file);
+          const text = await response.text();
+          const match = text.match(/const questions = \[(.*?)\];/s);
+          if (match) {
+            const parsed = eval("[" + match[1] + "]");
+            combinedQuestions.push(...parsed);
+          }
+        } catch (error) {
+          console.error(`Error loading ${file}:`, error);
         }
       }
 
       shuffleArray(combinedQuestions);
-
       return combinedQuestions.slice(0, 20);
     }
-
-    let questions = [];
-
-    loadAllQuestions().then(result => {
-      questions = result;
-    });
 
     function shuffleArray(array) {
       for (let i = array.length - 1; i > 0; i--) {
@@ -281,38 +350,50 @@
       }
     }
 
-    shuffleArray(allQuestions);
-
+    let questions = [];
     let currentQuestion = 0;
-    let score = 0;
+    let correctCount = 0;
+    let wrongCount = 0;
 
-    const questionEl = document.getElementById("question");
-    const answersEl = document.getElementById("answers");
-    const feedbackEl = document.getElementById("feedback");
-    const nextBtn = document.getElementById("nextBtn");
-    const progressFill = document.getElementById("progressFill");
+    const questionEl    = document.getElementById("question");
+    const answersEl     = document.getElementById("answers");
+    const feedbackEl    = document.getElementById("feedback");
+    const nextBtn       = document.getElementById("nextBtn");
+    const progressFill  = document.getElementById("progressFill");
+    const progressPct   = document.getElementById("progressPercent");
     const questionCounter = document.getElementById("questionCounter");
-    const scoreCounter = document.getElementById("scoreCounter");
+
+    loadAllQuestions().then(result => {
+      questions = result;
+      if (questions.length > 0) {
+        loadQuestion();
+      } else {
+        questionEl.textContent = "Σφάλμα: Δεν βρέθηκαν ερωτήσεις. Βεβαιωθείτε ότι ανοίγετε τα αρχεία μέσω Local Server.";
+      }
+    });
 
     function loadQuestion() {
       resetState();
 
       const q = questions[currentQuestion];
+      const letters = ["a", "b", "c", "d"];
 
-      questionEl.textContent = q.question;
-
+      questionEl.textContent = `${currentQuestion + 1}. ${q.question}`;
       questionCounter.textContent = `Ερώτηση ${currentQuestion + 1} / ${questions.length}`;
 
-      progressFill.style.width = `${((currentQuestion) / questions.length) * 100}%`;
+      const percent = Math.round((currentQuestion / questions.length) * 100);
+      progressFill.style.width = `${percent}%`;
+      progressPct.textContent = `${percent}%`;
+
+      nextBtn.textContent = currentQuestion === questions.length - 1
+        ? "Τέλος Quiz"
+        : "Επόμενη Ερώτηση";
 
       q.answers.forEach((answer, index) => {
         const button = document.createElement("button");
-
-        button.textContent = answer;
+        button.textContent = `${letters[index]}. ${answer}`;
         button.classList.add("answer-btn");
-
-        button.addEventListener("click", () => selectAnswer(index, button));
-
+        button.addEventListener("click", () => selectAnswer(index));
         answersEl.appendChild(button);
       });
     }
@@ -321,47 +402,46 @@
       nextBtn.disabled = true;
       feedbackEl.className = "feedback";
       feedbackEl.innerHTML = "";
-
       while (answersEl.firstChild) {
         answersEl.removeChild(answersEl.firstChild);
       }
     }
 
-    function selectAnswer(index, button) {
+    function selectAnswer(index) {
       const q = questions[currentQuestion];
       const buttons = document.querySelectorAll(".answer-btn");
+      const isCorrect = (index === q.correct);
 
+      // Απενεργοποίηση όλων
       buttons.forEach(btn => btn.disabled = true);
 
-      if (index === q.correct) {
-        button.classList.add("correct");
-        score++;
-        scoreCounter.textContent = `Score: ${score}`;
+      // ✅ Όλες οι λάθος κοκκινίζουν, μόνο η σωστή πρασινίζει
+      buttons.forEach((btn, i) => {
+        if (i === q.correct) {
+          btn.classList.add("correct");
+        } else {
+          btn.classList.add("wrong");
+        }
+      });
 
-        feedbackEl.classList.add("correct-box");
-        feedbackEl.innerHTML = `
-          <strong>Σωστό!</strong>
-          ${q.explanation}
-        `;
+      if (isCorrect) {
+        correctCount++;
       } else {
-        button.classList.add("wrong");
-
-        buttons[q.correct].classList.add("correct");
-
-        feedbackEl.classList.add("wrong-box");
-        feedbackEl.innerHTML = `
-          <strong>Λάθος!</strong>
-          Η σωστή απάντηση είναι: <b>${q.answers[q.correct]}</b><br><br>
-          ${q.explanation}
-        `;
+        wrongCount++;
       }
+
+      feedbackEl.className = isCorrect ? "feedback correct-box" : "feedback wrong-box";
+      feedbackEl.innerHTML = `
+        <strong>${isCorrect ? "Σωστή απάντηση!" : "Λάθος απάντηση."}</strong>
+        <p><b>Η σωστή απάντηση είναι:</b> ${q.answers[q.correct]}</p>
+        <p><b>Γιατί:</b> ${q.explanation}</p>
+      `;
 
       nextBtn.disabled = false;
     }
 
     function nextQuestion() {
       currentQuestion++;
-
       if (currentQuestion < questions.length) {
         loadQuestion();
       } else {
@@ -374,18 +454,27 @@
       document.getElementById("scoreScreen").style.display = "block";
 
       progressFill.style.width = "100%";
+      progressPct.textContent = "100%";
 
-      document.getElementById("finalScore").textContent =
-        `Πέτυχες ${score} από ${questions.length} σωστές απαντήσεις!`;
+      const total = questions.length;
+      const correctPercent = Math.round((correctCount / total) * 100);
+      const wrongPercent = Math.round((wrongCount / total) * 100);
+
+      document.getElementById("finalScore").innerHTML = `
+        Σωστές: <strong>${correctCount}</strong><br>
+        Λάθος: <strong>${wrongCount}</strong><br>
+        Σύνολο ερωτήσεων: <strong>${total}</strong>
+      `;
+
+      document.getElementById("correctFill").style.width = `${correctPercent}%`;
+      document.getElementById("wrongFill").style.width = `${wrongPercent}%`;
+      document.getElementById("correctPercentText").textContent = `${correctPercent}%`;
+      document.getElementById("wrongPercentText").textContent = `${wrongPercent}%`;
     }
 
     function restartQuiz() {
       location.reload();
     }
-
-    loadQuestion();
-
   </script>
 </body>
 </html>
-```
